@@ -26,7 +26,7 @@ public class URLTokenFilterFactory extends AbstractTokenFilterFactory {
 
 
     public URLTokenFilterFactory(IndexSettings indexSettings, Environment environment, String name, Settings settings) {
-        super(indexSettings, name, settings);
+        super(name, settings);
 
         this.parts = settings.getAsList("part", Arrays.asList("whole")).stream()
                 .map(URLPart::fromString)

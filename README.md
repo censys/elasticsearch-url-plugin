@@ -3,52 +3,14 @@ Elasticsearch URL Tokenizer and URL Token Filter
 
 This plugin enables URL tokenization and token filtering by URL part.
 
-[![Build Status](https://secure.travis-ci.org/jlinn/elasticsearch-analysis-url.png?branch=master)](http://travis-ci.org/jlinn/elasticsearch-analysis-url)
-
 ## Compatibility
 
-| Elasticsearch Version | Plugin Version |
-|-----------------------|----------------|
-| 7.16.1 | 7.16.1.0 |
-| 7.7.1 | 7.7.1.1 |
-| 5.6.3 | 5.6.3.0 |
-| 5.6.1 | 5.6.1.0 |
-| 5.5.1 | 5.5.1.0 |
-| 5.5.0 | 5.5.0.0 |
-| 5.2.2 | 5.2.2.0 |
-| 5.2.1 | 5.2.1.1 |
-| 5.1.1 | 5.1.1.0 |
-| 5.0.0 | 5.0.0.1 |
-| 2.4.3 | 2.4.3.0 |
-| 2.4.1 | 2.4.1.0 |
-| 2.4.0 | 2.4.0.0 |
-| 2.3.5 | 2.3.5.0 |
-| 2.3.4 | 2.3.4.3 |
-| 2.3.3 | 2.3.3.5 |
-| 2.3.2 | 2.3.2.1 |
-| 2.3.1 | 2.3.1.1 |
-| 2.3.0 | 2.3.0.1 |
-| 2.2.2 | 2.2.3 |
-| 2.2.1 | 2.2.2.1 |
-| 2.2.0 | 2.2.1 |
-| 2.1.1 | 2.2.0 |
-| 2.1.1 | 2.1.1 |
-| 2.0.0 | 2.1.0 |
-| 1.6.x, 1.7.x | 2.0.0 |
-| 1.6.0 | 1.2.1 |
-| 1.5.2 | 1.1.0 |
-| 1.4.2 | 1.0.0 |
+This repository has been changed to trunk-based development since we only support a single ElasticSearch version internally.
+Fixes will not be backported to earlier versions, nor do we guarantee tagging each release.
 
-## Installation
-### Elasticsearch v5
-```bash
-bin/elasticsearch-plugin install https://github.com/jlinn/elasticsearch-analysis-url/releases/download/v5.6.3.0/elasticsearch-analysis-url-5.6.3.0.zip
-```
+### Current Version
 
-### Elasticsearch v2
-```bash
-bin/plugin install https://github.com/jlinn/elasticsearch-analysis-url/releases/download/v2.4.3.0/elasticsearch-analysis-url-2.4.3.0.zip
-```
+ElasticSearch 8.4.1
 
 ## Usage
 ### URL Tokenizer

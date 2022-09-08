@@ -57,7 +57,7 @@ public class URLTokenFilterIntegrationTest extends URLAnalysisTestCase {
 
         Map<String, Object> doc = new HashMap<>();
         doc.put("url_malformed", "foo.bar/baz/bat");
-        client().prepareIndex(INDEX, "test").setSource(doc).get();
+        client().prepareIndex(INDEX).setSource(doc).get();
         refresh();
 
         SearchHits hits = client()
@@ -84,9 +84,9 @@ public class URLTokenFilterIntegrationTest extends URLAnalysisTestCase {
     public void testIndex() {
         Map<String, Object> doc = new HashMap<>();
         doc.put("url", "http://foo.bar/baz/bat");
-        client().prepareIndex(INDEX, "test").setSource(doc).get();
+        client().prepareIndex(INDEX).setSource(doc).get();
         doc.put("url", "https://foo.bar.com");
-        client().prepareIndex(INDEX, "test").setSource(doc).get();
+        client().prepareIndex(INDEX).setSource(doc).get();
         refresh();
 
         SearchHits hits = client().prepareSearch(INDEX).setQuery(QueryBuilders.matchAllQuery()).get().getHits();
