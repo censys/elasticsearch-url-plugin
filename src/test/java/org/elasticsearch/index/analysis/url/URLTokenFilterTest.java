@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import static org.elasticsearch.index.analysis.url.IsTokenStreamWithTokenAndPosition.hasTokenAtOffset;
+import static org.hamcrest.CoreMatchers.not;
 
 public class URLTokenFilterTest extends BaseTokenStreamTestCase {
     public static final String TEST_HTTP_URL = "http://www.foo.bar.com:9200/index_name/type_name/_search.html?foo=bar&baz=bat#tag";
@@ -42,6 +43,28 @@ public class URLTokenFilterTest extends BaseTokenStreamTestCase {
         filter = createFilter(TEST_HTTP_URL, URLPart.HOST)
                 .setUrlDeocde(false);
         assertThat(filter, hasTokenAtOffset("com", 19, 22));
+    }
+
+    @Test
+    public void testFilterHostNoTLD() throws IOException {
+        assertTokenStreamContents(createFilter(TEST_HTTP_URL, URLPart.HOST).setTokenizeHost(false).setTokenizeHostNoTLD(true), "www.foo.bar.com");
+
+        URLTokenFilter filter = createFilter(TEST_HTTP_URL, URLPart.HOST)
+                .setUrlDeocde(false)
+                .setTokenizeHostNoTLD(true);
+        assertThat(filter, hasTokenAtOffset("www.foo.bar.com", 7, 22));
+        filter = createFilter(TEST_HTTP_URL, URLPart.HOST)
+                .setUrlDeocde(false)
+                .setTokenizeHostNoTLD(true);
+        assertThat(filter, hasTokenAtOffset("foo.bar.com", 11, 22));
+        filter = createFilter(TEST_HTTP_URL, URLPart.HOST)
+                .setUrlDeocde(false)
+                .setTokenizeHostNoTLD(true);
+        assertThat(filter, hasTokenAtOffset("bar.com", 15, 22));
+        filter = createFilter(TEST_HTTP_URL, URLPart.HOST)
+                .setUrlDeocde(false)
+                .setTokenizeHostNoTLD(true);
+        assertThat(filter, not(hasTokenAtOffset("com", 19, 22)));
     }
 
     @Test

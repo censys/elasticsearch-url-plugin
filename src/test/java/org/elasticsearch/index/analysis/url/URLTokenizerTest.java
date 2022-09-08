@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.elasticsearch.index.analysis.url.IsTokenStreamWithTokenAndPosition.hasTokenAtOffset;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 /**
@@ -51,6 +52,28 @@ public class URLTokenizerTest extends BaseTokenStreamTestCase {
         assertThat(tokenizer, hasTokenAtOffset("bar.com", 15, 22));
         tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
         assertThat(tokenizer, hasTokenAtOffset("com", 19, 22));
+    }
+
+    public void testTokenizeHostNoTLD() throws IOException {
+        URLTokenizer tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
+        tokenizer.setTokenizeHostNoTLD(true);
+        assertTokenStreamContents(tokenizer, stringArray("www.foo.bar.com", "foo.bar.com", "bar.com"));
+
+        tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
+        tokenizer.setTokenizeHostNoTLD(true);
+        assertThat(tokenizer, hasTokenAtOffset("www.foo.bar.com", 7, 22));
+
+        tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
+        tokenizer.setTokenizeHostNoTLD(true);
+        assertThat(tokenizer, hasTokenAtOffset("foo.bar.com", 11, 22));
+
+        tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
+        tokenizer.setTokenizeHostNoTLD(true);
+        assertThat(tokenizer, hasTokenAtOffset("bar.com", 15, 22));
+
+        tokenizer = createTokenizer(TEST_HTTP_URL, URLPart.HOST);
+        tokenizer.setTokenizeHostNoTLD(true);
+        assertThat(tokenizer, not(hasTokenAtOffset("com", 19, 22)));
     }
 
 

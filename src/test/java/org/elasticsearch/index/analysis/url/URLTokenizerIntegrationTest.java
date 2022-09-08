@@ -35,6 +35,7 @@ public class URLTokenizerIntegrationTest extends URLAnalysisTestCase {
         assertTokensContain(URLTokenizerTest.TEST_HTTPS_URL, "tokenizer_url_protocol", "https");
 
         assertTokensContain(URLTokenizerTest.TEST_HTTP_URL, "tokenizer_url_host", "www.foo.bar.com", "foo.bar.com", "bar.com", "com");
+        assertTokensContain(URLTokenizerTest.TEST_HTTP_URL, "tokenizer_url_host_no_tld", "www.foo.bar.com", "foo.bar.com", "bar.com");
         List<AnalyzeAction.AnalyzeToken> hostTokens = assertTokensContain(URLTokenizerTest.TEST_HTTP_URL, "tokenizer_url_host_single", "www.foo.bar.com");
         assertThat(hostTokens, hasSize(1));
 
@@ -82,7 +83,6 @@ public class URLTokenizerIntegrationTest extends URLAnalysisTestCase {
         Text fragment = fragments[0];
         assertThat("URL was highlighted correctly", fragment.string(), equalTo("http://<b>www.foo.bar.com</b>:<b>8080</b>/baz/bat?bob=blah"));
     }
-
 
     @Test
     public void testBulkIndexing() throws Exception {
