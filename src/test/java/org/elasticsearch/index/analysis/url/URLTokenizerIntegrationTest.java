@@ -60,7 +60,7 @@ public class URLTokenizerIntegrationTest extends URLAnalysisTestCase {
         Map<String, String> docContent = new HashMap<>();
         final String url = "http://www.foo.bar.com:8080/baz/bat?bob=blah";
         docContent.put(field, url);
-        client().prepareIndex(INDEX, TYPE).setSource(docContent).get();
+        client().prepareIndex(INDEX).setSource(docContent).get();
         refresh(INDEX);
 
         SearchResponse response = client().prepareSearch(INDEX).setQuery(QueryBuilders.matchQuery(field, "www.foo.bar.com:8080"))
@@ -93,7 +93,7 @@ public class URLTokenizerIntegrationTest extends URLAnalysisTestCase {
         for (int i = 0; i < numDocs; i++) {
             content = new HashMap<>();
             content.put(field, "http://domain" + i + ".com/foo" + i + "/bar.html");
-            bulkBuilder.add(client().prepareIndex(INDEX, TYPE).setSource(content));
+            bulkBuilder.add(client().prepareIndex(INDEX).setSource(content));
         }
         BulkResponse bulkResponse = bulkBuilder.get();
         assertThat(bulkResponse.buildFailureMessage(), bulkResponse.hasFailures(), equalTo(false));

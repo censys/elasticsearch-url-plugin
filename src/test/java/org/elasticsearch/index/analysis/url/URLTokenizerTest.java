@@ -1,7 +1,7 @@
 package org.elasticsearch.index.analysis.url;
 
 import com.google.common.collect.Lists;
-import org.apache.lucene.analysis.BaseTokenStreamTestCase;
+import org.apache.lucene.tests.analysis.BaseTokenStreamTestCase;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.elasticsearch.index.analysis.URLPart;

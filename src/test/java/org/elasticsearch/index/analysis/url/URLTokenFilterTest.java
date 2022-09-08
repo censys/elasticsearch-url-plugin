@@ -1,8 +1,8 @@
 package org.elasticsearch.index.analysis.url;
 
-import org.apache.lucene.analysis.BaseTokenStreamTestCase;
-import org.apache.lucene.analysis.CannedTokenStream;
-import org.apache.lucene.analysis.Token;
+import org.apache.lucene.tests.analysis.BaseTokenStreamTestCase;
+import org.apache.lucene.tests.analysis.CannedTokenStream;
+import org.apache.lucene.tests.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
 import org.elasticsearch.index.analysis.URLPart;
 import org.junit.Test;
