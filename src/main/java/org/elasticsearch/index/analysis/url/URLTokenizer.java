@@ -48,6 +48,11 @@ public final class URLTokenizer extends Tokenizer {
     private boolean tokenizeHost = true;
 
     /**
+     * If true and used in conjunction with {@link URLTokenizer#tokenizeHost}, the TLD of the tokenized host will be omitted.
+     */
+    private boolean tokenizeHostNoTLD = false;
+
+    /**
      * If true, the url's path will be tokenized using a {@link PathHierarchyTokenizer}
      */
     private boolean tokenizePath = true;
@@ -106,6 +111,8 @@ public final class URLTokenizer extends Tokenizer {
     public void setUrlDecode(boolean urlDecode) { this.urlDecode = urlDecode; }
 
     public void setTokenizeHost(boolean tokenizeHost) { this.tokenizeHost = tokenizeHost; }
+
+    public void setTokenizeHostNoTLD(boolean tokenizeHostNoTLD) { this.tokenizeHostNoTLD = tokenizeHostNoTLD; }
 
     public void setTokenizePath(boolean tokenizePath) { this.tokenizePath = tokenizePath; }
 
@@ -356,7 +363,11 @@ public final class URLTokenizer extends Tokenizer {
             int end = getEndIndex(start, partStringRaw);
             return Collections.singletonList(new Token(partString, URLPart.HOST, start, end));
         }
-        return tokenize(URLPart.HOST, addReader(new ReversePathHierarchyTokenizer('.', '.'), new StringReader(partString)), start);
+        List<Token> hostTokens = tokenize(URLPart.HOST, addReader(new ReversePathHierarchyTokenizer('.', '.'), new StringReader(partString)), start);
+        if (tokenizeHostNoTLD && !hostTokens.isEmpty()) {
+            hostTokens.remove(hostTokens.size() - 1);
+        }
+        return hostTokens;
     }
 
 

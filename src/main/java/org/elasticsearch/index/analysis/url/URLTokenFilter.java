@@ -37,6 +37,11 @@ public final class URLTokenFilter extends TokenFilter {
     private boolean tokenizeHost = true;
 
     /**
+     * If true and used in conjunction with {@link URLTokenFilter#tokenizeHost}, the TLD of the tokenized host will be omitted.
+     */
+    private boolean tokenizeHostNoTLD = false;
+
+    /**
      * If true, the url's path will be tokenized using a {@link PathHierarchyTokenizer}
      */
     private boolean tokenizePath = true;
@@ -91,6 +96,11 @@ public final class URLTokenFilter extends TokenFilter {
 
     public URLTokenFilter setTokenizeHost(boolean tokenizeHost) {
         this.tokenizeHost = tokenizeHost;
+        return this;
+    }
+
+    public URLTokenFilter setTokenizeHostNoTLD(boolean tokenizeHostNoTLD) {
+        this.tokenizeHostNoTLD = tokenizeHostNoTLD;
         return this;
     }
 
@@ -180,6 +190,7 @@ public final class URLTokenFilter extends TokenFilter {
         tokenizer.setParts(new ArrayList<>(parts));
         tokenizer.setUrlDecode(urlDeocde);
         tokenizer.setTokenizeHost(tokenizeHost);
+        tokenizer.setTokenizeHostNoTLD(tokenizeHostNoTLD);
         tokenizer.setTokenizePath(tokenizePath);
         tokenizer.setTokenizeQuery(tokenizeQuery);
         tokenizer.setAllowMalformed(allowMalformed || passthrough);

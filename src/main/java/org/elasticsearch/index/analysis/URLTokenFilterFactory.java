@@ -18,6 +18,7 @@ public class URLTokenFilterFactory extends AbstractTokenFilterFactory {
     private final List<URLPart> parts;
     private final boolean urlDecode;
     private boolean tokenizeHost;
+    private boolean tokenizeHostNoTLD;
     private boolean tokenizePath;
     private boolean tokenizeQuery;
     private final boolean allowMalformed;
@@ -34,6 +35,7 @@ public class URLTokenFilterFactory extends AbstractTokenFilterFactory {
 
         this.urlDecode = settings.getAsBoolean("url_decode", false);
         this.tokenizeHost = settings.getAsBoolean("tokenize_host", true);
+        this.tokenizeHostNoTLD = settings.getAsBoolean("tokenize_host_no_tld", false);
         this.tokenizePath = settings.getAsBoolean("tokenize_path", true);
         this.tokenizeQuery = settings.getAsBoolean("tokenize_query", true);
         this.allowMalformed = settings.getAsBoolean("allow_malformed", false);
@@ -48,6 +50,7 @@ public class URLTokenFilterFactory extends AbstractTokenFilterFactory {
                 .setParts(parts)
                 .setTokenizeMalformed(tokenizeMalformed)
                 .setTokenizeHost(tokenizeHost)
+                .setTokenizeHostNoTLD(tokenizeHostNoTLD)
                 .setTokenizePath(tokenizePath)
                 .setTokenizeQuery(tokenizeQuery);
     }

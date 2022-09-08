@@ -46,6 +46,12 @@
                 "part": "host",
                 "tokenize_host": false
             },
+            "url_host_no_tld": {
+                "type": "url",
+                "part": "host",
+                "tokenize_host": true,
+                "tokenize_host_no_tld": true
+            },
             "url_port": {
                 "type": "url",
                 "part": "port"
@@ -85,6 +91,12 @@
             "url_host": {
                 "filter": [
                     "url_host"
+                ],
+                "tokenizer": "whitespace"
+            },
+            "url_host_no_tld": {
+                "filter": [
+                    "url_host_no_tld"
                 ],
                 "tokenizer": "whitespace"
             },

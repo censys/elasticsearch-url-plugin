@@ -17,6 +17,7 @@ public class URLTokenizerFactory extends AbstractTokenizerFactory {
     private List<URLPart> parts;
     private boolean urlDecode;
     private boolean tokenizeHost;
+    private boolean tokenizeHostNoTLD;
     private boolean tokenizePath;
     private boolean tokenizeQuery;
     private boolean allowMalformed;
@@ -33,6 +34,7 @@ public class URLTokenizerFactory extends AbstractTokenizerFactory {
         }
         this.urlDecode = settings.getAsBoolean("url_decode", false);
         this.tokenizeHost = settings.getAsBoolean("tokenize_host", true);
+        this.tokenizeHostNoTLD = settings.getAsBoolean("tokenize_host_no_tld", false);
         this.tokenizePath = settings.getAsBoolean("tokenize_path", true);
         this.tokenizeQuery = settings.getAsBoolean("tokenize_query", true);
         this.allowMalformed = settings.getAsBoolean("allow_malformed", false);
@@ -46,6 +48,7 @@ public class URLTokenizerFactory extends AbstractTokenizerFactory {
         tokenizer.setParts(parts);
         tokenizer.setUrlDecode(urlDecode);
         tokenizer.setTokenizeHost(tokenizeHost);
+        tokenizer.setTokenizeHostNoTLD(tokenizeHostNoTLD);
         tokenizer.setTokenizePath(tokenizePath);
         tokenizer.setTokenizeQuery(tokenizeQuery);
         tokenizer.setAllowMalformed(allowMalformed);

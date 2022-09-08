@@ -20,6 +20,7 @@ ElasticSearch 8.4.1
 * `allow_malformed`: Defaults to `false`. If `true`, malformed URLs will not be rejected, but will be passed through without being tokenized.
 * `tokenize_malformed`: Defaults to `false`. Has no effect if `allow_malformed` is `false`. If both are `true`, an attempt will be made to tokenize malformed URLs using regular expressions.
 * `tokenize_host`: Defaults to `true`. If `true`, the host will be further tokenized using a [reverse path hierarchy tokenizer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-pathhierarchy-tokenizer.html) with the delimiter set to `.`.
+* `tokenize_host_no_tld`: Defaults to `false`. If `true`, and used in conjunction with `tokenize_host`,  the TLD of the tokenized host will be omitted.
 * `tokenize_path`: Defaults to `true`. If `true`, the path will be tokenized using a [path hierarchy tokenizer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-pathhierarchy-tokenizer.html) with the delimiter set to `/`.
 * `tokenize_query`: Defaults to `true`. If `true`, the query string will be split on `&`.
 
@@ -81,6 +82,7 @@ curl 'http://localhost:9200/index_name/_analyze?analyzer=url_host&pretty' -d 'ht
 If the desired part cannot be found, no value will be indexed for that field.
 * `passthrough`: Defaults to `false`. If `true`, `allow_malformed` is implied, and any non-url tokens will be passed through the filter.  Valid URLs will be tokenized according to the filter's other settings.
 * `tokenize_host`: Defaults to `true`. If `true`, the host will be further tokenized using a [reverse path hierarchy tokenizer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-pathhierarchy-tokenizer.html) with the delimiter set to `.`.
+* `tokenize_host_no_tld`: Defaults to `false`. If `true`, and used in conjunction with `tokenize_host`,  the TLD of the tokenized host will be omitted.
 * `tokenize_path`: Defaults to `true`. If `true`, the path will be tokenized using a [path hierarchy tokenizer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-pathhierarchy-tokenizer.html) with the delimiter set to `/`.
 * `tokenize_query`: Defaults to `true`. If `true`, the query string will be split on `&`.
 
