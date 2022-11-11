@@ -10,7 +10,7 @@ Fixes will not be backported to earlier versions, nor do we guarantee tagging ea
 
 ### Current Version
 
-ElasticSearch 8.4.1
+ElasticSearch 8.5.0
 
 ## Usage
 ### URL Tokenizer
